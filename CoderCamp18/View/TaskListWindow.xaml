@@ -14,8 +14,18 @@
     <DockPanel Margin="12">
         <!-- Button Panel -->
         <DockPanel DockPanel.Dock="Bottom" LastChildFill="False">
-            <Button DockPanel.Dock="Right" Command="{Binding CompleteTaskCommand}" Content="X" Margin="6,6,0,0" Padding="6" />
-            <Button DockPanel.Dock="Right" Command="{Binding AddTaskCommand}" Content="+" Margin="6,6,0,0" Padding="6" />
+            <Button 
+                DockPanel.Dock="Right" 
+                Style="{StaticResource FontAwesomeButton}" 
+                Command="{Binding CompleteTaskCommand}" 
+                Content="&#xf046;"
+                ToolTip="Complete Task"/>
+            <Button 
+                DockPanel.Dock="Right" 
+                Style="{StaticResource FontAwesomeButton}" 
+                Command="{Binding AddTaskCommand}" 
+                Content="&#xf055;" 
+                ToolTip="Add Task"/>
         </DockPanel>
 
         <!-- Task List -->
@@ -26,11 +36,11 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <DockPanel>
-                        <TextBlock Name="TaskName"  Text="{Binding Path=Name}" FontSize="22" />
+                        <TextBlock Name="TaskName"  Text="{Binding Path=Name}" FontSize="18" Foreground="#333" />
                     </DockPanel>
                     <DataTemplate.Triggers>
                         <DataTrigger Binding="{Binding Path=Completed}" Value="True">
-                            <Setter TargetName="TaskName" Property="Foreground" Value="#666" />
+                            <Setter TargetName="TaskName" Property="Foreground" Value="#999" />
                             <Setter TargetName="TaskName" Property="TextDecorations" Value="Strikethrough"></Setter>
                         </DataTrigger>
                     </DataTemplate.Triggers>
