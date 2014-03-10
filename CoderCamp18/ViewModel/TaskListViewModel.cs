@@ -24,7 +24,9 @@
 
 using System.ComponentModel;
 using System.Linq;
+using System.Windows.Input;
 using CoderCamp18.Annotations;
+using CoderCamp18.Commands;
 using CoderCamp18.Model;
 
 namespace CoderCamp18.ViewModel
@@ -32,10 +34,15 @@ namespace CoderCamp18.ViewModel
     public class TaskListViewModel : INotifyPropertyChanged
     {
         private BindingList<Task> _tasks;
+        private ICommand _completeTaskCommand;
+        private ICommand _addTaskCommand;
+        private Task _selectedTask;
 
         public TaskListViewModel()
         {
             Tasks = new BindingList<Task>();
+            AddTaskCommand = new RelayCommand( p => AddTask(), p => true );
+            CompleteTaskCommand = new RelayCommand(p => CompleteTask(), p => SelectedTask != null && !SelectedTask.Completed );
 
             using ( var db = new TaskContext( ) )
             {
@@ -44,6 +51,39 @@ namespace CoderCamp18.ViewModel
                 {
                     Tasks.Add( task );
                 }
+            }
+        }
+
+        public ICommand AddTaskCommand
+        {
+            get { return _addTaskCommand; }
+            set
+            {
+                if ( Equals( value, _addTaskCommand ) ) return;
+                _addTaskCommand = value;
+                OnPropertyChanged( "AddTaskCommand" );
+            }
+        }
+
+        public ICommand CompleteTaskCommand
+        {
+            get { return _completeTaskCommand; }
+            set
+            {
+                if ( Equals( value, _completeTaskCommand ) ) return;
+                _completeTaskCommand = value;
+                OnPropertyChanged( "CompleteTaskCommand" );
+            }
+        }
+
+        public Task SelectedTask
+        {
+            get { return _selectedTask; }
+            set
+            {
+                if ( Equals( value, _selectedTask ) ) return;
+                _selectedTask = value;
+                OnPropertyChanged( "SelectedTask" );
             }
         }
 
@@ -56,6 +96,16 @@ namespace CoderCamp18.ViewModel
                 _tasks = value;
                 OnPropertyChanged( "Tasks" );
             }
+        }
+
+        private void AddTask()
+        {
+            // TODO
+        }
+
+        private void CompleteTask()
+        {
+            // TODO
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

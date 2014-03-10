@@ -14,14 +14,15 @@
     <DockPanel Margin="12">
         <!-- Button Panel -->
         <DockPanel DockPanel.Dock="Bottom" LastChildFill="False">
-            <Button DockPanel.Dock="Right" Content="X" Margin="6,6,0,0" Padding="6" />
-            <Button DockPanel.Dock="Right" Content="+" Margin="6,6,0,0" Padding="6" />
+            <Button DockPanel.Dock="Right" Command="{Binding CompleteTaskCommand}" Content="X" Margin="6,6,0,0" Padding="6" />
+            <Button DockPanel.Dock="Right" Command="{Binding AddTaskCommand}" Content="+" Margin="6,6,0,0" Padding="6" />
         </DockPanel>
 
         <!-- Task List -->
         <ListView 
             DockPanel.Dock="Bottom"
-            ItemsSource="{Binding Path=Tasks}">
+            ItemsSource="{Binding Path=Tasks}"
+            SelectedItem="{Binding Path=SelectedTask}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <DockPanel>
