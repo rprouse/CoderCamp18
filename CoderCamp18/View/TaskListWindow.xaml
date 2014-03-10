@@ -6,7 +6,6 @@
         xmlns:viewModel="clr-namespace:CoderCamp18.ViewModel"
         mc:Ignorable="d" 
         d:DataContext="{d:DesignInstance viewModel:TaskListViewModel}"
-        Foreground="#333"
         Title="CoderCamp 18" 
         Height="350" 
         Width="525" 
