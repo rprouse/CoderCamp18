@@ -22,20 +22,49 @@
 // 
 // **********************************************************************************
 
-using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using CoderCamp18.Annotations;
 using CoderCamp18.Model;
 
 namespace CoderCamp18.ViewModel
 {
-    public class TaskListViewModel
+    public class TaskListViewModel : INotifyPropertyChanged
     {
-        private DataStore _data;
-        private ICollection<Task> _tasks;
+        private BindingList<Task> _tasks;
 
         public TaskListViewModel()
         {
-            _data = new DataStore();
-            _tasks = _data.FetchAll();
+            Tasks = new BindingList<Task>();
+
+            using ( var db = new TaskContext( ) )
+            {
+                var query = from t in db.Tasks select t;
+                foreach ( var task in query )
+                {
+                    Tasks.Add( task );
+                }
+            }
+        }
+
+        public BindingList<Task> Tasks
+        {
+            get { return _tasks; }
+            set
+            {
+                if ( Equals( value, _tasks ) ) return;
+                _tasks = value;
+                OnPropertyChanged( "Tasks" );
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged( string propertyName )
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if ( handler != null ) handler( this, new PropertyChangedEventArgs( propertyName ) );
         }
     }
 }

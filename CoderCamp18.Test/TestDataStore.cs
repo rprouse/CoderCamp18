@@ -28,6 +28,7 @@ using System;
 using System.Linq;
 using CoderCamp18.Model;
 using NUnit.Framework;
+using DataStore = CoderCamp18.Test.Mocks.DataStore;
 
 #endregion
 

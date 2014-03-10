@@ -23,9 +23,9 @@
 // **********************************************************************************
 
 using System.Collections.Generic;
-using System.Threading.Tasks;
+using Task = CoderCamp18.Model.Task;
 
-namespace CoderCamp18.Model
+namespace CoderCamp18.Test.Mocks
 {
     public class DataStore
     {
@@ -36,13 +36,13 @@ namespace CoderCamp18.Model
         {
             _tasks = new Dictionary<int, Task>();
 
-            var data = new DataStore();
-            data.Add("Come up with idea for CoderCamp", true);
-            data.Add("Find a better idea");
-            data.Add("Write a demo app");
-            data.Add("Prepare presentation");
-            data.Add("Get nervous...");
-            data.Add("Drink beer");
+            //var data = new DataStore();
+            //data.Add("Come up with idea for CoderCamp", true);
+            //data.Add("Find a better idea");
+            //data.Add("Write a demo app");
+            //data.Add("Prepare presentation");
+            //data.Add("Get nervous...");
+            //data.Add("Drink beer");
         }
 
         /// <summary>
@@ -53,9 +53,10 @@ namespace CoderCamp18.Model
         /// <returns>The newly added task</returns>
         public Task Add( string name, bool completed = false )
         {
-            var task = new Task( name, completed );
-            _tasks.Add( task.Id, task );
-            return task;
+            //var task = new Task( name, completed );
+            //_tasks.Add( task.Id, task );
+            //return task;
+            return null;
         }
 
         /// <summary>
