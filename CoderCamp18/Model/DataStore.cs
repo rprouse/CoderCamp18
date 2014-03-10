@@ -67,5 +67,14 @@ namespace CoderCamp18.Model
         {
             return _tasks.ContainsKey( id ) ? _tasks[id] : null;
         }
+
+        /// <summary>
+        /// Fetches all tasks from our imaginary database
+        /// </summary>
+        /// <returns>A list of all tasks</returns>
+        public ICollection<Task> FetchAll()
+        {
+            return _tasks.Values;
+        }
     }
 }

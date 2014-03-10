@@ -22,57 +22,20 @@
 // 
 // **********************************************************************************
 
-#region Using Directives
-
-using System;
-using System.Linq;
+using System.Collections.Generic;
 using CoderCamp18.Model;
-using NUnit.Framework;
 
-#endregion
-
-namespace CoderCamp18.Test
+namespace CoderCamp18.ViewModel
 {
-    [TestFixture]
-    public class TestDataStore
+    public class TaskListViewModel
     {
         private DataStore _data;
+        private ICollection<Task> _tasks;
 
-        [SetUp]
-        public void SetUp()
+        public TaskListViewModel()
         {
             _data = new DataStore();
-        }
-
-        [TearDown]
-        public void TearDown()
-        {
-            _data = null;
-        }
-
-        [Test]
-        public void CanAddTask()
-        {
-            Task task = _data.Add( "New task" );
-            Assert.That( task, Is.Not.Null );
-            Task fetched = _data.Fetch( task.Id );
-            Assert.That( fetched, Is.Not.Null );
-            Assert.That( fetched, Is.EqualTo( task ) );
-        }
-
-        [Test]
-        public void FetchReturnsNullIfIdNotFound()
-        {
-            // Our database ids always start at 1
-            Task task = _data.Fetch( 0 );
-            Assert.That( task, Is.Null );
-        }
-
-        [Test]
-        public void CanFetchAll()
-        {
-            var tasks = _data.FetchAll();
-            Assert.That( tasks.Count, Is.GreaterThan( 0 ) );
+            _tasks = _data.FetchAll();
         }
     }
 }
