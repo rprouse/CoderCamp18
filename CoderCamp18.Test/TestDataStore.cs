@@ -24,11 +24,10 @@
 
 #region Using Directives
 
-using System;
 using System.Linq;
 using CoderCamp18.Model;
+using CoderCamp18.Test.Mocks;
 using NUnit.Framework;
-using DataStore = CoderCamp18.Test.Mocks.DataStore;
 
 #endregion
 
@@ -37,12 +36,12 @@ namespace CoderCamp18.Test
     [TestFixture]
     public class TestDataStore
     {
-        private DataStore _data;
+        private TestTaskContext _data;
 
         [SetUp]
         public void SetUp()
         {
-            _data = new DataStore();
+            _data = new TestTaskContext();
         }
 
         [TearDown]
@@ -54,26 +53,16 @@ namespace CoderCamp18.Test
         [Test]
         public void CanAddTask()
         {
-            Task task = _data.Add( "New task" );
+            var task = new Task { Name = "New task" };
             Assert.That( task, Is.Not.Null );
-            Task fetched = _data.Fetch( task.Id );
+            _data.Tasks.Add(task);
+            _data.SaveChanges();
+            var query = from t in _data.Tasks
+                        where t.Name == "New task"
+                        select t;
+            Task fetched = query.First();
             Assert.That( fetched, Is.Not.Null );
             Assert.That( fetched, Is.EqualTo( task ) );
-        }
-
-        [Test]
-        public void FetchReturnsNullIfIdNotFound()
-        {
-            // Our database ids always start at 1
-            Task task = _data.Fetch( 0 );
-            Assert.That( task, Is.Null );
-        }
-
-        [Test]
-        public void CanFetchAll()
-        {
-            var tasks = _data.FetchAll();
-            Assert.That( tasks.Count, Is.GreaterThan( 0 ) );
         }
     }
 }
