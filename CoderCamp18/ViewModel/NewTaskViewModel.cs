@@ -29,11 +29,11 @@ using CoderCamp18.View;
 
 namespace CoderCamp18.ViewModel
 {
-    public class NewTaskViewModel : BaseViewModel
+    public class NewTaskViewModel : BaseViewModel, INewTaskViewModel
     {
         private string _name;
         private ICommand _addTaskCommand;
-        private NewTaskWindow _view;
+        private readonly INewTaskDialog _view;
 
         public NewTaskViewModel()
         {

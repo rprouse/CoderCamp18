@@ -21,20 +21,9 @@
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 // 
 // **********************************************************************************
-
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-
-namespace CoderCamp18.Model
+namespace CoderCamp18.View
 {
-    public class TaskContext : DbContext, ITaskContext
+    public interface INewTaskDialog : IDialog
     {
-        public DbSet<Task> Tasks { get; set; }
-
-        public IEnumerable<Task> GetAllTasks()
-        {
-            return from t in Tasks select t;
-        }
     }
 }

@@ -22,19 +22,14 @@
 // 
 // **********************************************************************************
 
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
+using System;
+using System.Windows;
 
-namespace CoderCamp18.Model
+namespace CoderCamp18.View
 {
-    public class TaskContext : DbContext, ITaskContext
+    public interface IWindow
     {
-        public DbSet<Task> Tasks { get; set; }
-
-        public IEnumerable<Task> GetAllTasks()
-        {
-            return from t in Tasks select t;
-        }
+        Window Window { get; }
+        event EventHandler Closed;
     }
 }

@@ -21,13 +21,9 @@
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 // 
 // **********************************************************************************
-
-using System.Windows;
-
 namespace CoderCamp18.View
 {
-    public interface IWindowProvider
+    public interface ITaskListWindow : IWindow
     {
-        Window Window { get; }
     }
 }

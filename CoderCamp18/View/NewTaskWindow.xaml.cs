@@ -33,7 +33,7 @@ namespace CoderCamp18.View
     /// <summary>
     /// Interaction logic for NewTaskWindow.xaml
     /// </summary>
-    public partial class NewTaskWindow
+    public partial class NewTaskWindow : INewTaskDialog
     {
         public NewTaskWindow()
         {

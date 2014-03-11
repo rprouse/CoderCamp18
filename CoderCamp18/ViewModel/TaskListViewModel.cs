@@ -23,10 +23,7 @@
 // **********************************************************************************
 
 using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Windows.Input;
-using CoderCamp18.Annotations;
 using CoderCamp18.Commands;
 using CoderCamp18.Model;
 using CoderCamp18.View;
@@ -35,23 +32,29 @@ namespace CoderCamp18.ViewModel
 {
     public class TaskListViewModel : BaseViewModel
     {
-        private readonly IWindowProvider _view;
+        private readonly ITaskListWindow _view;
         private BindingList<Task> _tasks;
         private ICommand _completeTaskCommand;
         private ICommand _addTaskCommand;
         private Task _selectedTask;
-        private TaskContext _db;
+        private ITaskContext _db;
 
-        public TaskListViewModel(IWindowProvider view)
+        public TaskListViewModel(ITaskListWindow view)
         {
             _view = view;
+            _view.Closed += (s, e) =>
+            {
+                if (_db != null)
+                    _db.Dispose();
+                _db = null;
+            };
+
             Tasks = new BindingList<Task>();
             AddTaskCommand = new RelayCommand( p => AddTask(), p => true );
             CompleteTaskCommand = new RelayCommand(p => CompleteTask(), p => SelectedTask != null && !SelectedTask.Completed );
 
             _db = new TaskContext();
-            var query = from t in _db.Tasks select t;
-            foreach ( var task in query )
+            foreach ( var task in _db.GetAllTasks() )
                 Tasks.Add( task );
         }
 
@@ -101,12 +104,12 @@ namespace CoderCamp18.ViewModel
 
         private void AddTask()
         {
-            var dlg = new NewTaskViewModel();
-            dlg.Owner = _view.Window;
-            var result = dlg.ShowDialog();
+            INewTaskViewModel viewModel = new NewTaskViewModel();
+            viewModel.Owner = _view.Window;
+            var result = viewModel.ShowDialog();
             if (result.HasValue && result.Value)
             {
-                var newTask = new Task {Name = dlg.Name};
+                var newTask = new Task {Name = viewModel.Name};
                 _db.Tasks.Add(newTask);
                 _db.SaveChanges();
                 _tasks.Add(newTask);

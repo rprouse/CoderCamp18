@@ -6,7 +6,7 @@ namespace CoderCamp18.View
     /// <summary>
     /// Interaction logic for TaskListWindow.xaml
     /// </summary>
-    public partial class TaskListWindow : IWindowProvider
+    public partial class TaskListWindow : ITaskListWindow
     {
         public TaskListWindow()
         {

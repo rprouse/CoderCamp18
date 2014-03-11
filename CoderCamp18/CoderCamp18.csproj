@@ -102,13 +102,18 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Commands\RelayCommand.cs" />
+    <Compile Include="Model\ITaskContext.cs" />
     <Compile Include="Model\Task.cs" />
     <Compile Include="Model\TaskContext.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
+    <Compile Include="ViewModel\INewTaskViewModel.cs" />
+    <Compile Include="View\IDialog.cs" />
     <Compile Include="ViewModel\NewTaskViewModel.cs" />
     <Compile Include="ViewModel\TaskListViewModel.cs" />
-    <Compile Include="View\IWindowProvider.cs" />
+    <Compile Include="View\INewTaskDialog.cs" />
+    <Compile Include="View\ITaskListWindow.cs" />
+    <Compile Include="View\IWindow.cs" />
     <Compile Include="View\NewTaskWindow.xaml.cs">
       <DependentUpon>NewTaskWindow.xaml</DependentUpon>
     </Compile>
