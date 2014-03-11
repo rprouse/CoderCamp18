@@ -11,4 +11,14 @@
         <Setter Property="Height" Value="30" />
         <Setter Property="Foreground" Value="#333" />
     </Style>
+    
+    <Style TargetType="Label">
+        <Setter Property="Foreground" Value="#333" />
+        <Setter Property="FontSize" Value="18" />
+    </Style>
+
+    <Style TargetType="TextBox">
+        <Setter Property="Foreground" Value="#333" />
+        <Setter Property="Padding" Value="3" />
+    </Style>
 </ResourceDictionary>

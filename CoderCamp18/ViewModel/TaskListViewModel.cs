@@ -24,34 +24,35 @@
 
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using CoderCamp18.Annotations;
 using CoderCamp18.Commands;
 using CoderCamp18.Model;
+using CoderCamp18.View;
 
 namespace CoderCamp18.ViewModel
 {
-    public class TaskListViewModel : INotifyPropertyChanged
+    public class TaskListViewModel : BaseViewModel
     {
+        private readonly IWindowProvider _view;
         private BindingList<Task> _tasks;
         private ICommand _completeTaskCommand;
         private ICommand _addTaskCommand;
         private Task _selectedTask;
+        private TaskContext _db;
 
-        public TaskListViewModel()
+        public TaskListViewModel(IWindowProvider view)
         {
+            _view = view;
             Tasks = new BindingList<Task>();
             AddTaskCommand = new RelayCommand( p => AddTask(), p => true );
             CompleteTaskCommand = new RelayCommand(p => CompleteTask(), p => SelectedTask != null && !SelectedTask.Completed );
 
-            using ( var db = new TaskContext( ) )
-            {
-                var query = from t in db.Tasks select t;
-                foreach ( var task in query )
-                {
-                    Tasks.Add( task );
-                }
-            }
+            _db = new TaskContext();
+            var query = from t in _db.Tasks select t;
+            foreach ( var task in query )
+                Tasks.Add( task );
         }
 
         public ICommand AddTaskCommand
@@ -61,7 +62,7 @@ namespace CoderCamp18.ViewModel
             {
                 if ( Equals( value, _addTaskCommand ) ) return;
                 _addTaskCommand = value;
-                OnPropertyChanged( "AddTaskCommand" );
+                OnPropertyChanged();
             }
         }
 
@@ -72,7 +73,7 @@ namespace CoderCamp18.ViewModel
             {
                 if ( Equals( value, _completeTaskCommand ) ) return;
                 _completeTaskCommand = value;
-                OnPropertyChanged( "CompleteTaskCommand" );
+                OnPropertyChanged();
             }
         }
 
@@ -83,7 +84,7 @@ namespace CoderCamp18.ViewModel
             {
                 if ( Equals( value, _selectedTask ) ) return;
                 _selectedTask = value;
-                OnPropertyChanged( "SelectedTask" );
+                OnPropertyChanged();
             }
         }
 
@@ -94,27 +95,28 @@ namespace CoderCamp18.ViewModel
             {
                 if ( Equals( value, _tasks ) ) return;
                 _tasks = value;
-                OnPropertyChanged( "Tasks" );
+                OnPropertyChanged();
             }
         }
 
         private void AddTask()
         {
-            // TODO
+            var dlg = new NewTaskViewModel();
+            dlg.Owner = _view.Window;
+            var result = dlg.ShowDialog();
+            if (result.HasValue && result.Value)
+            {
+                var newTask = new Task {Name = dlg.Name};
+                _db.Tasks.Add(newTask);
+                _db.SaveChanges();
+                _tasks.Add(newTask);
+            }
         }
 
         private void CompleteTask()
         {
-            // TODO
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged( string propertyName )
-        {
-            PropertyChangedEventHandler handler = PropertyChanged;
-            if ( handler != null ) handler( this, new PropertyChangedEventArgs( propertyName ) );
+            SelectedTask.Completed = true;
+            _db.SaveChanges();
         }
     }
 }

@@ -22,53 +22,16 @@
 // 
 // **********************************************************************************
 
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using CoderCamp18.Annotations;
+using System.Data.Entity;
 
 namespace CoderCamp18.Model
 {
-    public class Task : INotifyPropertyChanged
+    public class TaskContext : DbContext
     {
-        private string _name;
-        private bool _completed;
-
-        public Task()
+        public TaskContext() 
         {
-            Completed = false;
         }
 
-        public int Id { get; set; }
-
-        public string Name
-        {
-            get { return _name; }
-            set
-            {
-                if (value == _name) return;
-                _name = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public bool Completed
-        {
-            get { return _completed; }
-            set
-            {
-                if (value.Equals(_completed)) return;
-                _completed = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            var handler = PropertyChanged;
-            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
-        }
+        public DbSet<Task> Tasks { get; set; }
     }
 }

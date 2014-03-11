@@ -22,23 +22,24 @@
 // 
 // **********************************************************************************
 
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using CoderCamp18.Annotations;
+using System.Windows;
+using System.Windows.Input;
+using CoderCamp18.Commands;
+using CoderCamp18.View;
 
-namespace CoderCamp18.Model
+namespace CoderCamp18.ViewModel
 {
-    public class Task : INotifyPropertyChanged
+    public class NewTaskViewModel : BaseViewModel
     {
         private string _name;
-        private bool _completed;
+        private ICommand _addTaskCommand;
+        private NewTaskWindow _view;
 
-        public Task()
+        public NewTaskViewModel()
         {
-            Completed = false;
+            AddTaskCommand = new RelayCommand(p => AddTask(), p => CanAddTask());
+            _view = new NewTaskWindow(this);
         }
-
-        public int Id { get; set; }
 
         public string Name
         {
@@ -51,24 +52,36 @@ namespace CoderCamp18.Model
             }
         }
 
-        public bool Completed
+        public ICommand AddTaskCommand
         {
-            get { return _completed; }
+            get { return _addTaskCommand; }
             set
             {
-                if (value.Equals(_completed)) return;
-                _completed = value;
+                if (Equals(value, _addTaskCommand)) return;
+                _addTaskCommand = value;
                 OnPropertyChanged();
             }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        public Window Owner
         {
-            var handler = PropertyChanged;
-            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+            set { _view.Owner = value; }
+        }
+
+        public bool? ShowDialog()
+        {
+            return _view.ShowDialog();
+        }
+
+        private void AddTask()
+        {
+            _view.DialogResult = true;
+            _view.Close();
+        }
+
+        public bool CanAddTask()
+        {
+            return !string.IsNullOrWhiteSpace(Name);
         }
     }
 }

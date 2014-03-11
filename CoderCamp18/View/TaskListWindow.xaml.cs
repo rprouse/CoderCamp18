@@ -6,12 +6,14 @@ namespace CoderCamp18.View
     /// <summary>
     /// Interaction logic for TaskListWindow.xaml
     /// </summary>
-    public partial class TaskListWindow
+    public partial class TaskListWindow : IWindowProvider
     {
         public TaskListWindow()
         {
             InitializeComponent();
-            DataContext = new TaskListViewModel();
+            DataContext = new TaskListViewModel(this);
         }
+
+        public Window Window { get { return this; } }
     }
 }

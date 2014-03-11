@@ -22,53 +22,28 @@
 // 
 // **********************************************************************************
 
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using CoderCamp18.Annotations;
+#region Using Directives
 
-namespace CoderCamp18.Model
+using CoderCamp18.ViewModel;
+
+#endregion
+
+namespace CoderCamp18.View
 {
-    public class Task : INotifyPropertyChanged
+    /// <summary>
+    /// Interaction logic for NewTaskWindow.xaml
+    /// </summary>
+    public partial class NewTaskWindow
     {
-        private string _name;
-        private bool _completed;
-
-        public Task()
+        public NewTaskWindow()
         {
-            Completed = false;
+            InitializeComponent();
         }
 
-        public int Id { get; set; }
-
-        public string Name
+        public NewTaskWindow(NewTaskViewModel viewModel)
+            : this()
         {
-            get { return _name; }
-            set
-            {
-                if (value == _name) return;
-                _name = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public bool Completed
-        {
-            get { return _completed; }
-            set
-            {
-                if (value.Equals(_completed)) return;
-                _completed = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            var handler = PropertyChanged;
-            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+            DataContext = viewModel;
         }
     }
 }

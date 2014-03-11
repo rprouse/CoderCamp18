@@ -16,13 +16,13 @@
             <Button 
                 DockPanel.Dock="Right" 
                 Style="{StaticResource FontAwesomeButton}" 
-                Command="{Binding CompleteTaskCommand}" 
+                Command="{Binding Path=CompleteTaskCommand}" 
                 Content="&#xf046;"
                 ToolTip="Complete Task"/>
             <Button 
                 DockPanel.Dock="Right" 
                 Style="{StaticResource FontAwesomeButton}" 
-                Command="{Binding AddTaskCommand}" 
+                Command="{Binding Path=AddTaskCommand}" 
                 Content="&#xf055;" 
                 ToolTip="Add Task"/>
         </DockPanel>

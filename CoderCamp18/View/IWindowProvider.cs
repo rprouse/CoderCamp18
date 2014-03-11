@@ -22,53 +22,12 @@
 // 
 // **********************************************************************************
 
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using CoderCamp18.Annotations;
+using System.Windows;
 
-namespace CoderCamp18.Model
+namespace CoderCamp18.View
 {
-    public class Task : INotifyPropertyChanged
+    public interface IWindowProvider
     {
-        private string _name;
-        private bool _completed;
-
-        public Task()
-        {
-            Completed = false;
-        }
-
-        public int Id { get; set; }
-
-        public string Name
-        {
-            get { return _name; }
-            set
-            {
-                if (value == _name) return;
-                _name = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public bool Completed
-        {
-            get { return _completed; }
-            set
-            {
-                if (value.Equals(_completed)) return;
-                _completed = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            var handler = PropertyChanged;
-            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
-        }
+        Window Window { get; }
     }
 }
