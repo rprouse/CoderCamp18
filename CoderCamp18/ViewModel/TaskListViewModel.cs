@@ -27,6 +27,7 @@ using System.Windows.Input;
 using CoderCamp18.Commands;
 using CoderCamp18.Model;
 using CoderCamp18.View;
+using Ninject;
 
 namespace CoderCamp18.ViewModel
 {
@@ -53,7 +54,7 @@ namespace CoderCamp18.ViewModel
             AddTaskCommand = new RelayCommand( p => AddTask(), p => true );
             CompleteTaskCommand = new RelayCommand(p => CompleteTask(), p => SelectedTask != null && !SelectedTask.Completed );
 
-            _db = new TaskContext();
+            _db = Factory.Kernel.Get<ITaskContext>();
             foreach ( var task in _db.GetAllTasks() )
                 Tasks.Add( task );
         }
