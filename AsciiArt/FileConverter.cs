@@ -22,30 +22,34 @@
 // 
 // **********************************************************************************
 
-using CoderCamp18.Model;
-using CoderCamp18.View;
-using CoderCamp18.ViewModel;
-using Ninject.Modules;
+using System;
+using System.Drawing;
+using AsciiArt.ImageConverters;
 
-namespace CoderCamp18.Modules
+namespace AsciiArt
 {
-    public class TaskModule : NinjectModule
+    public class FileConverter
     {
-        /// <summary>
-        /// Loads the module into the kernel.
-        /// </summary>
-        public override void Load()
+        private IAsciiConverter _converter;
+
+        public FileConverter()
         {
-            // Models
-            Bind<ITaskContext>().To<TaskContext>();
+            _converter = new Ascii();
+        }
 
-            // Views
-            Bind<INewTaskDialog>().To<NewTaskWindow>();
-            Bind<ITaskListWindow>().To<TaskListWindow>();
-
-            // ViewModels
-            Bind<INewTaskViewModel>().To<NewTaskViewModel>();
-            Bind<TaskListViewModel>().To<TaskListViewModel>();
+        public string ConvertFile(string filename)
+        {
+            try
+            {
+                using (var image = Image.FromFile(filename))
+                {
+                    return _converter.Convert(image);
+                }
+            }
+            catch (Exception e)
+            {
+                return string.Format("Error converting image. {0}", e.Message);
+            }
         }
     }
 }

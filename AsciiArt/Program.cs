@@ -10,21 +10,15 @@ namespace AsciiArt
         {
             string filename = args.Length > 0 ? args[0] : "octocat.png";
 
-            try
-            {
-                using (var image = Image.FromFile(filename))
-                {
-                    var ascii = new Ascii();
-                    var str = ascii.Convert(image);
-                    Console.Write(str);
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine( "Error converting image. " + e.Message );
-            }
+            var converter = new FileConverter();
+            string output = converter.ConvertFile(filename);
+            Console.WriteLine(output);
 
-            Console.WriteLine();
+            WaitToExit();
+        }
+
+        private static void WaitToExit()
+        {
             Console.WriteLine();
             Console.WriteLine("*** Press ENTER to Exit ***");
             Console.ReadLine();

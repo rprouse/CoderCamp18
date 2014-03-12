@@ -3,10 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.30110.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoderCamp18", "CoderCamp18\CoderCamp18.csproj", "{03A270EB-7F46-440F-8384-F24C736239C4}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoderCamp18.Test", "CoderCamp18.Test\CoderCamp18.Test.csproj", "{01EB3863-6895-41FE-9F00-FE16A0C1B96C}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsciiArt", "AsciiArt\AsciiArt.csproj", "{20909645-8F59-40CB-94C2-8A36B12E7CCA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsciiArt.Test", "AsciiArt.Test\AsciiArt.Test.csproj", "{DD73AF89-5DEA-4E63-8DE7-6BCCC27DF662}"
@@ -17,14 +13,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{03A270EB-7F46-440F-8384-F24C736239C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{03A270EB-7F46-440F-8384-F24C736239C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{03A270EB-7F46-440F-8384-F24C736239C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{03A270EB-7F46-440F-8384-F24C736239C4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{01EB3863-6895-41FE-9F00-FE16A0C1B96C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{01EB3863-6895-41FE-9F00-FE16A0C1B96C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{01EB3863-6895-41FE-9F00-FE16A0C1B96C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{01EB3863-6895-41FE-9F00-FE16A0C1B96C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{20909645-8F59-40CB-94C2-8A36B12E7CCA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{20909645-8F59-40CB-94C2-8A36B12E7CCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{20909645-8F59-40CB-94C2-8A36B12E7CCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
