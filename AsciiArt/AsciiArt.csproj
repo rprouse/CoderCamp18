@@ -45,6 +45,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Factory.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="FileConverter.cs" />
     <Compile Include="ImageConverters\Ascii.cs" />
     <Compile Include="ImageConverters\IAsciiConverter.cs" />
