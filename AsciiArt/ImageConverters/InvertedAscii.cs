@@ -44,7 +44,7 @@ namespace AsciiArt.ImageConverters
         /// <returns>
         /// An ascii representation of the pixel
         /// </returns>
-        public override char GetCharForPixel(Color pixel)
+        public override string GetCharForPixel(Color pixel)
         {
             // Convert the transparent background to black
             if (pixel.A == 0)
@@ -56,7 +56,7 @@ namespace AsciiArt.ImageConverters
             if (i > MAP.Length - 1)
                 i = MAP.Length - 1;
 
-            return MAP[i];
+            return MAP.Substring(i,1);
         }
     }
 }

@@ -48,19 +48,20 @@ namespace AsciiArt.ImageConverters
         /// <returns></returns>
         public string Convert(Image image)
         {
-            var resized = ResizeImage(image);
-
-            var sb = new StringBuilder(resized.Width * resized.Height);
-            for (int y = 0; y < resized.Height; y++)
+            using (var resized = ResizeImage(image))
             {
-                for (int x = 0; x < resized.Width; x++)
+                var sb = new StringBuilder(resized.Width * resized.Height);
+                for (int y = 0; y < resized.Height; y++)
                 {
-                    char c = GetCharForPixel(resized.GetPixel(x, y));
-                    sb.Append(c);
+                    for (int x = 0; x < resized.Width; x++)
+                    {
+                        string s = GetCharForPixel(resized.GetPixel(x, y));
+                        sb.Append(s);
+                    }
+                    sb.AppendLine();
                 }
-                sb.AppendLine();
+                return sb.ToString();
             }
-            return sb.ToString();
         }
 
         /// <summary>
@@ -68,7 +69,7 @@ namespace AsciiArt.ImageConverters
         /// </summary>
         /// <param name="pixel">The pixel.</param>
         /// <returns>An ascii representation of the pixel</returns>
-        public virtual char GetCharForPixel(Color pixel)
+        public virtual string GetCharForPixel(Color pixel)
         {
             // Convert the transparent background to white
             if (pixel.A == 0)
@@ -80,7 +81,7 @@ namespace AsciiArt.ImageConverters
             if (i > MAP.Length - 1)
                 i = MAP.Length - 1;
 
-            return MAP[i];
+            return MAP.Substring(i,1);;
         }
 
         /// <summary>

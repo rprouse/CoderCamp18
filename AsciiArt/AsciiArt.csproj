@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FileConverter.cs" />
+    <Compile Include="ImageConverters\AnsiiAscii.cs" />
     <Compile Include="ImageConverters\Ascii.cs" />
     <Compile Include="ImageConverters\IAsciiConverter.cs" />
     <Compile Include="ImageConverters\InvertedAscii.cs" />

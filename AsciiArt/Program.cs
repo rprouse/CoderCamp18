@@ -19,6 +19,7 @@ namespace AsciiArt
 
         private static void WaitToExit()
         {
+            Console.ResetColor();
             Console.WriteLine();
             Console.WriteLine("*** Press ENTER to Exit ***");
             Console.ReadLine();
