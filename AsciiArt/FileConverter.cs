@@ -34,7 +34,7 @@ namespace AsciiArt
 
         public FileConverter()
         {
-            _converter = new Ascii();
+            _converter = new Ascii(8);
         }
 
         public string ConvertFile(string filename)

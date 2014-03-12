@@ -30,6 +30,16 @@ namespace AsciiArt.ImageConverters
     public class Ascii : IAsciiConverter
     {
         protected const string MAP = "@MBHENR#KWXDFPQASUZbdehx*8Gm&04LOVYkpq5Tagns69owz$CIu23Jcfry%1v7l+it[] {}?j|()=~!-/<>\"^_';,:`. ";
+        private int _pixelsPerCharacter;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Ascii"/> class.
+        /// </summary>
+        /// <param name="pixelsPerCharacter">The pixels per character.</param>
+        public Ascii(int pixelsPerCharacter)
+        {
+            _pixelsPerCharacter = pixelsPerCharacter;
+        }
 
         /// <summary>
         /// Converts the given image to ascii art
@@ -81,7 +91,7 @@ namespace AsciiArt.ImageConverters
         /// <returns></returns>
         private Bitmap ResizeImage(Image image)
         {
-            return new Bitmap(image, new Size(image.Width / 8, image.Height / 8));
+            return new Bitmap(image, new Size(image.Width / _pixelsPerCharacter, image.Height / _pixelsPerCharacter));
         }
     }
 }
