@@ -52,6 +52,7 @@
     <Compile Include="ImageConverters\Ascii.cs" />
     <Compile Include="ImageConverters\IAsciiConverter.cs" />
     <Compile Include="ImageConverters\InvertedAscii.cs" />
+    <Compile Include="Modules\AsciiModule.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
