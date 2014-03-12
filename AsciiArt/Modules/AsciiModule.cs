@@ -35,7 +35,7 @@ namespace AsciiArt.Modules
         public override void Load()
         {
             Bind<FileConverter>().To<FileConverter>();
-            Bind<IAsciiConverter>().To<Ascii>();
+            Bind<IAsciiConverter>().To<InvertedAscii>();
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using System;
-using AsciiArt.ImageConverters;
 using Ninject;
 
 namespace AsciiArt
