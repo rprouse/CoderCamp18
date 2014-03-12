@@ -40,7 +40,7 @@ namespace AsciiArt.Test.ImageConverters
         [TestFixtureSetUp]
         public void FixtureSetUp()
         {
-            _ascii = new Ascii();
+            _ascii = new Ascii(8);
         }
 
         [Test]

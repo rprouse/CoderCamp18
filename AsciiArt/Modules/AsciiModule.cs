@@ -35,7 +35,9 @@ namespace AsciiArt.Modules
         public override void Load()
         {
             Bind<FileConverter>().To<FileConverter>();
-            Bind<IAsciiConverter>().To<InvertedAscii>();
+            Bind<IAsciiConverter>()
+                .To<InvertedAscii>()
+                .WithConstructorArgument("pixelsPerCharacter", 8);
         }
     }
 }

@@ -29,6 +29,15 @@ namespace AsciiArt.ImageConverters
     public class InvertedAscii : Ascii, IAsciiConverter
     {
         /// <summary>
+        /// Initializes a new instance of the <see cref="Ascii"/> class.
+        /// </summary>
+        /// <param name="pixelsPerCharacter">The pixels per character.</param>
+        public InvertedAscii(int pixelsPerCharacter) 
+            : base(pixelsPerCharacter)
+        {
+        }
+
+        /// <summary>
         /// Gets the character for pixel based on its brightness.
         /// </summary>
         /// <param name="pixel">The pixel.</param>

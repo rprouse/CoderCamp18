@@ -41,7 +41,7 @@ namespace AsciiArt.Test.ImageConverters
         [TestFixtureSetUp]
         public void FixtureSetUp()
         {
-            _ascii = new InvertedAscii();
+            _ascii = new InvertedAscii(8);
         }
 
         [Test]
