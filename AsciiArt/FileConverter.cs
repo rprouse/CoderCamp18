@@ -32,9 +32,9 @@ namespace AsciiArt
     {
         private IAsciiConverter _converter;
 
-        public FileConverter()
+        public FileConverter(IAsciiConverter converter)
         {
-            _converter = new Ascii();
+            _converter = converter;
         }
 
         public string ConvertFile(string filename)
