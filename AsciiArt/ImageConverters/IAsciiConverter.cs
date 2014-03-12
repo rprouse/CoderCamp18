@@ -40,6 +40,6 @@ namespace AsciiArt.ImageConverters
         /// </summary>
         /// <param name="pixel">The pixel.</param>
         /// <returns>An ascii representation of the pixel</returns>
-        char GetCharForPixel(Color pixel);
+        string GetCharForPixel(Color pixel);
     }
 }

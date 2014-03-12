@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ImageConverters\AsciiAsciiTest.cs" />
     <Compile Include="ImageConverters\AsciiTest.cs" />
     <Compile Include="ImageConverters\InvertedAsciiTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

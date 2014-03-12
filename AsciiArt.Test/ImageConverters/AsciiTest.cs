@@ -45,17 +45,17 @@ namespace AsciiArt.Test.ImageConverters
 
         [Test]
         [TestCaseSource("TestPixels")]
-        public void TestGetCharForPixel(Color pixel, char expectedChar)
+        public void TestGetCharForPixel(Color pixel, string expected)
         {
-            char c = _ascii.GetCharForPixel(pixel);
-            Assert.That(c, Is.EqualTo(expectedChar));
+            string c = _ascii.GetCharForPixel(pixel);
+            Assert.That(c, Is.EqualTo(expected));
         }
 
         private static object[] TestPixels =
         {
-            new object[] { Color.White, '@' },
-            new object[] { Color.Transparent, '@' },
-            new object[] { Color.Black, ' ' }
+            new object[] { Color.White, "@" },
+            new object[] { Color.Transparent, "@" },
+            new object[] { Color.Black, " " }
         };
     }
 }
