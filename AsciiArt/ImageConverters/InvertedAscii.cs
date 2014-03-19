@@ -23,6 +23,7 @@
 // **********************************************************************************
 
 using System.Drawing;
+using AsciiArt.Interfaces;
 
 namespace AsciiArt.ImageConverters
 {

@@ -22,36 +22,58 @@
 // 
 // **********************************************************************************
 
+#region Using Directives
+
 using System;
+using System.Drawing;
 using AsciiArt.ImageConverters;
 using AsciiArt.Interfaces;
+using NUnit.Framework;
 
-namespace AsciiArt
+#endregion
+
+namespace AsciiArt.Test
 {
-    public class FileConverter
+    class MockImageProvider : IImageProvider
     {
-        private IAsciiConverter _converter;
-        private readonly IImageProvider _imageProvider;
+        private readonly Color _color;
 
-        public FileConverter(IAsciiConverter converter, IImageProvider imageProvider)
+        public MockImageProvider(Color color)
         {
-            _converter = converter;
-            _imageProvider = imageProvider;
+            _color = color;
         }
 
-        public string ConvertFile(string filename)
+        #region Implementation of IImageProvider
+
+        public Image GetImage( string filename )
         {
-            try
-            {
-                using(var image = _imageProvider.GetImage(filename))
-                {
-                    return _converter.Convert(image);
-                }
-            }
-            catch (Exception e)
-            {
-                return string.Format("Error converting image. {0}", e.Message);
-            }
+            var image = new Bitmap( 1, 1 );
+            image.SetPixel( 0, 0, _color );
+            return image;
         }
+
+        #endregion
+    }
+
+    [TestFixture]
+    public class FileConverterTests
+    {
+        [Test]
+        [TestCaseSource("TestPixels")]
+        public void AsciiConverterTest(Color color, string expected)
+        {
+            var imageConverter = new Ascii(1);
+            var imageProvider = new MockImageProvider( color );
+            var fileConverter = new FileConverter( imageConverter, imageProvider );
+            var result = fileConverter.ConvertFile( "dummy.png" );
+            Assert.That( result, Is.EqualTo( expected + "\r\n" ) );
+        }
+
+        private static object[] TestPixels =
+        {
+            new object[] { Color.White, "@" },
+            new object[] { Color.Transparent, "@" },
+            new object[] { Color.Black, " " }
+        };
     }
 }

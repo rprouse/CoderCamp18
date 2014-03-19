@@ -23,6 +23,7 @@
 // **********************************************************************************
 
 using AsciiArt.ImageConverters;
+using AsciiArt.Interfaces;
 using Ninject.Modules;
 
 namespace AsciiArt.Modules
@@ -38,6 +39,8 @@ namespace AsciiArt.Modules
             Bind<IAsciiConverter>()
                 .To<InvertedAscii>()
                 .WithConstructorArgument("pixelsPerCharacter", 8);
+
+            Bind<IImageProvider>().To<ImageProvider>();
         }
     }
 }

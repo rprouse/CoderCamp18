@@ -24,6 +24,7 @@
 
 using System.Drawing;
 using System.Text;
+using AsciiArt.Interfaces;
 
 namespace AsciiArt.ImageConverters
 {

@@ -24,7 +24,7 @@
 
 using System.Drawing;
 
-namespace AsciiArt.ImageConverters
+namespace AsciiArt.Interfaces
 {
     public interface IAsciiConverter
     {
