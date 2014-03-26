@@ -1,6 +1,6 @@
 # Dependency Injection #
 
-Demo application for my presentation on Dependency Injection at CoderCamp 18 in Hamilton, ON.
+Demo application for my presentation on Dependency Injection at [CoderCamp 18](http://www.softwarehamilton.com/2014/03/26/codercamp18-this-wednesday/) in Hamilton, ON.
 
 The presentation is [available here](https://drive.google.com/file/d/0B8OyBgym9Nl7THRuRGphanNXOHc/edit?usp=sharing).
 
