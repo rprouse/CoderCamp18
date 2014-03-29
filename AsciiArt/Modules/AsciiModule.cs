@@ -23,38 +23,27 @@
 // **********************************************************************************
 
 using System;
-using System.Drawing;
 using AsciiArt.ImageConverters;
+using Ninject.Modules;
 
-namespace AsciiArt
+namespace AsciiArt.Modules
 {
-    public interface IFileConverter
+    public class AsciiModule : NinjectModule
     {
-        string ConvertFile(string filename);
-    }
-
-    public class FileConverter : IFileConverter
-    {
-        private IAsciiConverter _converter;
-
-        public FileConverter(IAsciiConverter converter)
+        /// <summary>
+        /// Loads the module into the kernel.
+        /// </summary>
+        public override void Load()
         {
-            _converter = converter;
-        }
-
-        public string ConvertFile(string filename)
-        {
-            try
-            {
-                using (var image = Image.FromFile(filename))
-                {
-                    return _converter.Convert(image);
-                }
-            }
-            catch (Exception e)
-            {
-                return string.Format("Error converting image. {0}", e.Message);
-            }
+            Bind<IFileConverter>().To<FileConverter>();
+            Bind<IAsciiConverter>()
+                .ToMethod(c => {
+                    if (DateTime.Now.Hour > 12)
+                        return new Ascii(8);
+                    else
+                        return new InvertedAscii(8);
+                })
+                .WithConstructorArgument(8);
         }
     }
 }

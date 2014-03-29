@@ -46,11 +46,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Factory.cs" />
     <Compile Include="FileConverter.cs" />
     <Compile Include="ImageConverters\AnsiiAscii.cs" />
     <Compile Include="ImageConverters\Ascii.cs" />
     <Compile Include="ImageConverters\IAsciiConverter.cs" />
     <Compile Include="ImageConverters\InvertedAscii.cs" />
+    <Compile Include="Modules\AsciiModule.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

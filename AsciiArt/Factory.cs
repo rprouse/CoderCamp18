@@ -22,39 +22,19 @@
 // 
 // **********************************************************************************
 
-using System;
-using System.Drawing;
-using AsciiArt.ImageConverters;
+using System.Reflection;
+using Ninject;
 
 namespace AsciiArt
 {
-    public interface IFileConverter
+    public static class Factory
     {
-        string ConvertFile(string filename);
-    }
+        public static IKernel Kernel { get; private set; }
 
-    public class FileConverter : IFileConverter
-    {
-        private IAsciiConverter _converter;
-
-        public FileConverter(IAsciiConverter converter)
+        static Factory()
         {
-            _converter = converter;
-        }
-
-        public string ConvertFile(string filename)
-        {
-            try
-            {
-                using (var image = Image.FromFile(filename))
-                {
-                    return _converter.Convert(image);
-                }
-            }
-            catch (Exception e)
-            {
-                return string.Format("Error converting image. {0}", e.Message);
-            }
+            Kernel = new StandardKernel();
+            Kernel.Load(Assembly.GetExecutingAssembly());
         }
     }
 }
